@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""testing the 'base_model' """
+"""
+testing the 'base_model'
+"""
 
 from datetime import datetime
 from models import storage
