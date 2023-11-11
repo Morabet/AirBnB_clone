@@ -29,9 +29,11 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """override the 'emptyline' function"""
         pass
 
     def check_class(self, className):
+        """a function to check if a className is valid"""
         if not className:
             print("** class name missing **")
 
@@ -64,6 +66,7 @@ class HBNBCommand(cmd.Cmd):
         print(txt)
 
     def complete_create(self, text, line, begidx, endidx):
+        """give completion suggestions"""
         if not text:
             completions = classes.keys()[:]
 
@@ -175,6 +178,7 @@ class HBNBCommand(cmd.Cmd):
         print(txt)
 
     def complete_all(self, text, line, begidx, endidx):
+        """give completion suggestions"""
         if not text:
             completions = classes.keys()[:]
 
