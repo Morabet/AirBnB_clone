@@ -75,3 +75,7 @@ class TestBaseModel(unittest.TestCase):
         base = BaseModel()
         diff = base.updated_at - base.created_at
         self.assertTrue(abs(diff.total_seconds()) < 0.01)
+
+
+if __name__ == '__main__':
+    unittest.main()
