@@ -4,9 +4,9 @@ Defining the 'Base model' will contain
 the base class and functions
 """
 
-import uuid
-import models
 from datetime import datetime
+import models
+import uuid
 
 
 class BaseModel:
