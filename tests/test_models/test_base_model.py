@@ -21,7 +21,7 @@ class TestBaseModel(unittest.TestCase):
     def resetStorage(self):
         """reset FileStorage"""
         FileStorage._FileStorage__objects = {}
-        
+
         # check if a file was created and remove it
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
@@ -57,7 +57,6 @@ class TestBaseModel(unittest.TestCase):
         """Testing initialization with kwargs"""
         self.resetStorage()
 
-        
         args = {"name": "john wick", "age": 42}
         base = BaseModel(**args)
         self.assertTrue(hasattr(base, "name"))
