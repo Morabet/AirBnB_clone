@@ -15,6 +15,7 @@ import shlex
 
 
 class HBNBCommand(cmd.Cmd):
+    """Implementing the Console command"""
 
     prompt = '(hbnb) '
     instances = storage.all()
