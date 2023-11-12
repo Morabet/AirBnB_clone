@@ -55,6 +55,11 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test saving objects to file.json"""
 
+        try:
+            os.remove('file.json')
+        except Exception:
+            pass
+
         storage = FileStorage()
         new_dict = {}
 
