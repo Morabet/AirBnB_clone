@@ -10,6 +10,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from models import storage
 import json
 import os
 import unittest
@@ -20,6 +21,14 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 class TestFileStorage(unittest.TestCase):
     """Testing the FileStorage class"""
+
+    def setUp(self):
+        """ Set up test environment """
+        del_list = []
+        for key in storage._FileStorage__objects.keys():
+            del_list.append(key)
+        for key in del_list:
+            del storage._FileStorage__objects[key]
 
     def tearDown(self):
         """ Remove storage file at end of tests """
@@ -54,11 +63,6 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """Test saving objects to file.json"""
-
-        try:
-            os.remove('file.json')
-        except Exception:
-            pass
 
         storage = FileStorage()
         new_dict = {}
