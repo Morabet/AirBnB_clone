@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-testing the 'base_model'
-"""
+"""testing the 'base_model' """
 
 from datetime import datetime
 from models import storage
@@ -9,11 +7,16 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 import unittest
+from unittest import mock
 import os
 
 
 class TestBaseModel(unittest.TestCase):
     """Test cases for the 'BaseModel' class"""
+
+    def setUp(self):
+        """Sets up test methods."""
+        pass
 
     def tearDown(self):
         """remove test methods"""
@@ -68,7 +71,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(getattr(base, "age")), int)
         self.assertEqual(getattr(base, "age"), 42)
 
-    def test_3_datetime_created(self):
+    def test_datetime_created(self):
         """Tests if updated_at & created_at are current at creation."""
 
         date_now = datetime.now()
@@ -76,6 +79,55 @@ class TestBaseModel(unittest.TestCase):
         diff = base.updated_at - base.created_at
         self.assertTrue(abs(diff.total_seconds()) < 0.01)
 
+    def test_to_dict(self):
+        """Test obj.to_dict()"""
 
-if __name__ == '__main__':
+        b = BaseModel()
+        b.name = "Ali"
+        b.my_number = 89
+        d = b.to_dict()
+        expected_attrs = ["id",
+                          "created_at",
+                          "updated_at",
+                          "name",
+                          "my_number",
+                          "__class__"]
+        self.assertCountEqual(d.keys(), expected_attrs)
+        self.assertEqual(d['__class__'], 'BaseModel')
+        self.assertEqual(d['name'], "Ali")
+        self.assertEqual(d['my_number'], 89)
+
+    def test_to_dict_values(self):
+        """test 'to_dict()' values are correct"""
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
+        b = BaseModel()
+        d = b.to_dict()
+        self.assertEqual(d["__class__"], "BaseModel")
+        self.assertEqual(type(d["created_at"]), str)
+        self.assertEqual(type(d["updated_at"]), str)
+        self.assertEqual(d["created_at"], b.created_at.strftime(time_format))
+        self.assertEqual(d["updated_at"], b.updated_at.strftime(time_format))
+
+    def test_str(self):
+        """test '__str__'"""
+        b = BaseModel()
+        string = "[BaseModel] ({}) {}".format(b.id, b.__dict__)
+        self.assertEqual(string, str(b))
+
+    @mock.patch('models.storage')
+    def test_save(self, mock_storage):
+        """Test that 'save' method updates `updated_at` and calls
+        `storage.save`"""
+        b = BaseModel()
+        old_created_at = b.created_at
+        old_updated_at = b.updated_at
+        b.save()
+        new_created_at = b.created_at
+        new_updated_at = b.updated_at
+        self.assertNotEqual(old_updated_at, new_updated_at)
+        self.assertEqual(old_created_at, new_created_at)
+        self.assertTrue(mock_storage.save.called)
+
+
+if __name__ == "__main__":
     unittest.main()
