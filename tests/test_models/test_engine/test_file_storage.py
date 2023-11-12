@@ -21,6 +21,13 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 class TestFileStorage(unittest.TestCase):
     """Testing the FileStorage class"""
 
+    def tearDown(self):
+        """ Remove storage file at end of tests """
+        try:
+            os.remove('file.json')
+        except Exception:
+            pass
+
     def test_all(self):
         """Test that 'all' method returns 'FileStorage.__objects' attr"""
 
@@ -48,8 +55,6 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test saving objects to file.json"""
 
-        # if os.path.exists("file.json"):
-        os.remove("file.json")
         storage = FileStorage()
         new_dict = {}
 
