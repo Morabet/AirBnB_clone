@@ -1,19 +1,14 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
 """Testing the 'place' model"""
 
 from datetime import datetime
 from models.place import Place
 from models.base_model import BaseModel
-=======
-"""testing the 'place' model"""
->>>>>>> fa8cb9416d45eb621bbb042ee4ea4cd1278a33ae
 
 import unittest
 
 
 class TestPlace(unittest.TestCase):
-<<<<<<< HEAD
     """Testing 'Place' class"""
 
     def test_is_subclass(self):
@@ -122,12 +117,4 @@ class TestPlace(unittest.TestCase):
 
 
 if __name__ == "__main__":
-=======
-    """Testing the 'Place' class"""
-
-    pass
-
-
-if __name__ == '__main__':
->>>>>>> fa8cb9416d45eb621bbb042ee4ea4cd1278a33ae
     unittest.main()
