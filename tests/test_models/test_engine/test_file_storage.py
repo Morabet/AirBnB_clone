@@ -84,6 +84,16 @@ class TestFileStorage(unittest.TestCase):
             temp = key
         self.assertEqual(temp, 'BaseModel' + '.' + obj_id)
 
+    def test_reload(self):
+        """test loadeding to '__objects' """
+        obj = BaseModel()
+        obj.save()
+        storage.reload()
+        loaded = None
+        for inst in storage.all().values():
+            loaded = inst
+        self.assertEqual(obj.to_dict()['id'], loaded.to_dict()['id'])
+
 
 if __name__ == "__main__":
     unittest.main()
