@@ -19,7 +19,7 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
 
-    amenity_id = []
+    amenity_ids = []
 
     def __init__(self, *args, **kwargs):
         """Initialize the instance"""

@@ -1,9 +1,13 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """Testing the "city" model"""
 
 from datetime import datetime
 from models.city import City
 from models.base_model import BaseModel
+=======
+"""testing the 'city' model"""
+>>>>>>> fa8cb9416d45eb621bbb042ee4ea4cd1278a33ae
 
 import unittest
 
@@ -11,6 +15,7 @@ import unittest
 class TestCity(unittest.TestCase):
     """Testing the 'City' class"""
 
+<<<<<<< HEAD
     def test_is_subclass_of_basemode(self):
         """Test that 'City' is a subclass of BaseModel"""
         city = City()
@@ -47,4 +52,10 @@ class TestCity(unittest.TestCase):
 
 
 if __name__ == "__main__":
+=======
+    pass
+
+
+if __name__ == '__main__':
+>>>>>>> fa8cb9416d45eb621bbb042ee4ea4cd1278a33ae
     unittest.main()

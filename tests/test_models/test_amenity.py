@@ -1,9 +1,13 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """Defining the test file for 'amenity' model"""
 
 from datetime import datetime
 from models.amenity import Amenity
 from models.base_model import BaseModel
+=======
+"""testing the 'amenity' model"""
+>>>>>>> fa8cb9416d45eb621bbb042ee4ea4cd1278a33ae
 
 import unittest
 
@@ -11,6 +15,7 @@ import unittest
 class TestAmenity(unittest.TestCase):
     """Testing the 'Amenity' class"""
 
+<<<<<<< HEAD
     def test_is_subclass_of_basemodel(self):
         """Test that 'Amenity' is a subclass of 'BaseModel'"""
         amenity = Amenity()
@@ -57,4 +62,10 @@ class TestAmenity(unittest.TestCase):
 
 
 if __name__ == "__main__":
+=======
+    pass
+
+
+if __name__ == '__main__':
+>>>>>>> fa8cb9416d45eb621bbb042ee4ea4cd1278a33ae
     unittest.main()
