@@ -62,10 +62,27 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__objects = save
 
     def test_save(self):
-        """ FileStorage save method """
+        """ testing the 'save' method"""
         obj = BaseModel()
         storage.save()
         self.assertTrue(os.path.exists('file.json'))
+
+    def test_reload_from_nonexistent(self):
+        """if file does not exist """
+        self.assertEqual(storage.reload(), None)
+
+    def test_type_objects(self):
+        """ test if '__objects' is a dict """
+        self.assertEqual(type(storage.all()), dict)
+
+    def test_key_format(self):
+        """ test if 'key' is correct"""
+        obj = BaseModel()
+        obj.save()
+        obj_id = obj.to_dict()['id']
+        for key in storage.all().keys():
+            temp = key
+        self.assertEqual(temp, 'BaseModel' + '.' + obj_id)
 
 
 if __name__ == "__main__":
