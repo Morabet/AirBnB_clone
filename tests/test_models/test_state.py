@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""testing the 'user' model"""
+"""testing the 'state' model"""
 
 import unittest
 
 
-class TestUser(unittest.TestCase):
-    """Testing the 'User' class"""
+class TestState(unittest.TestCase):
+    """Testing the 'State' class"""
 
     pass
 
