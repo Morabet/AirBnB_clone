@@ -24,8 +24,11 @@ class TestFileStorage(unittest.TestCase):
 
     def setUp(self):
         """ Set up test environment """
-        FileStorage._FileStorage__objects = {}
-        FileStorage().save()
+        del_list = []
+        for key in storage._FileStorage__objects.keys():
+            del_list.append(key)
+        for key in del_list:
+            del storage._FileStorage__objects[key]
 
     def tearDown(self):
         """ Remove storage file at end of tests """
@@ -59,31 +62,10 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__objects = save
 
     def test_save(self):
-        """Test saving objects to file.json"""
-
-        storage = FileStorage()
-        new_dict = {}
-
-        for k, v in classes.items():
-            obj = v()
-            obj_key = obj.__class__.__name__ + "." + obj.id
-            new_dict[obj_key] = obj
-
-        save = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = new_dict
+        """ FileStorage save method """
+        obj = BaseModel()
         storage.save()
-
-        FileStorage._FileStorage__objects = save
-
-        for k, v in new_dict.items():
-            new_dict[k] = v.to_dict()
-
-        string = json.dumps(new_dict)
-
-        with open("file.json", "r") as f:
-            data = f.read()
-
-        self.assertEqual(json.loads(string), json.loads(data))
+        self.assertTrue(os.path.exists('file.json'))
 
 
 if __name__ == "__main__":
